@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semester Grade Calculator — Weighted Grade & Final Exam Score Tool</title>
+<meta name="description" content="Free semester grade calculator with weighted categories, dropped scores, and target-grade planning. Enter your homework, quiz, test, and final exam weights to see your current grade and exactly what you need on what's left.">
+<link rel="canonical" href="https://semestergradecalculators.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Semester Grade Calculator — Weighted Grade & Final Exam Score Tool">
+<meta property="og:description" content="Free semester grade calculator with weighted categories, dropped scores, and target-grade planning. See your current grade and what you need on what's left.">
+<meta property="og:url" content="https://semestergradecalculators.com/">
+<meta property="og:site_name" content="Semester Grade Calculators">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Semester Grade Calculator — Weighted Grade & Final Exam Score Tool">
+<meta name="twitter:description" content="Free semester grade calculator with weighted categories, dropped scores, and target-grade planning.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Semester Grade Calculator",
+  "url": "https://semestergradecalculators.com/",
+  "applicationCategory": "EducationApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Free online semester grade calculator that computes weighted category averages and the score needed on remaining work to hit a target grade."
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I calculate a weighted semester grade?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Convert each category's weight to a decimal, multiply it by that category's average score, then add every category's result together to get your semester grade." }
+    },
+    {
+      "@type": "Question",
+      "name": "What final exam score do I need to hit my target grade?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Subtract your current weighted contribution from your target grade, then divide the result by the final exam's weight (as a decimal) to get the score you need." }
+    },
+    {
+      "@type": "Question",
+      "name": "My gradebook uses points instead of percentages. How do I convert?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Divide the points you earned by the points possible, then multiply by 100 to get a percentage you can enter into the calculator." }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when my lowest quiz or test score is dropped?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It is removed before that category's average is calculated, which typically raises the category average." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does participation count toward my semester grade?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, if your teacher assigns participation its own weighted category in the syllabus." }
+    },
+    {
+      "@type": "Question",
+      "name": "How is a semester grade different from a GPA?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A semester grade covers one class over one term. GPA averages several semester grades into a single number, usually on a 4.0 scale." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">§</span>
+      <span class="brand-text">Semester Grade<span class="brand-text-sub">calculators.com</span></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#calculator">Calculator</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#examples">Examples</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Weighted &middot; Free &middot; No sign-up</p>
+        <h1>Know your grade<br>before the report card does.</h1>
+        <p class="hero-sub">Enter your homework, quizzes, tests, and final exam &mdash; weighted exactly like your syllabus &mdash; and get your current semester grade instantly, plus exactly what you need on what's left.</p>
+        <div class="hero-actions">
+          <a href="#calculator" class="btn btn-primary">Open the gradebook ↓</a>
+          <a href="#how-it-works" class="btn btn-ghost">How it works</a>
+        </div>
+      </div>
+      <div class="hero-stamp-preview" aria-hidden="true">
+        <div class="ledger-card small-preview">
+          <div class="stamp-mini">
+            <span class="stamp-letter">A&minus;</span>
+            <span class="stamp-pct">90.4%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section id="calculator" class="calculator-section">
+    <div class="wrap">
+      <h2 class="section-title"><span class="section-eyebrow">01 — The Tool</span>Build your gradebook</h2>
+      <p class="section-lede">List every category from your syllabus with its weight, then add scores as you get them. Leave a category blank to keep it out of your current grade &mdash; the calculator will use it later to figure out what you still need.</p>
+
+      <div class="calc-shell">
+        <div class="ledger-card calc-card">
+
+          <div class="calc-table-head" role="row">
+            <span>Category</span>
+            <span>Weight %</span>
+            <span>Mode</span>
+            <span>Scores</span>
+            <span>Drop lowest</span>
+            <span class="sr-only">Remove</span>
+          </div>
+
+          <div id="category-rows"></div>
+
+          <button id="add-row" type="button" class="btn btn-add">+ Add category</button>
+
+          <div class="weight-meter" id="weight-meter">
+            <span id="weight-total-label">Total weight: 0%</span>
+            <div class="meter-track"><div class="meter-fill" id="weight-fill"></div></div>
+          </div>
+
+          <div class="target-block">
+            <h3>Set a target (optional)</h3>
+            <p class="target-help">Fill this in once you know which category still needs a score &mdash; usually the final exam &mdash; and we'll tell you what it takes to hit your goal.</p>
+            <div class="target-row">
+              <label>Target grade
+                <input type="number" id="target-grade" placeholder="e.g. 90" min="0" max="100" inputmode="decimal">
+              </label>
+              <span class="target-note" id="remaining-note">No ungraded categories yet</span>
+            </div>
+          </div>
+
+          <button id="calculate-btn" type="button" class="btn btn-primary btn-calc">Calculate my grade</button>
+        </div>
+
+        <div class="ledger-card result-card" id="result-card">
+          <p class="result-eyebrow">Current Grade</p>
+          <div class="stamp-wrap" id="stamp-wrap">
+            <div class="stamp" id="stamp">
+              <span class="stamp-letter" id="stamp-letter">&mdash;</span>
+              <span class="stamp-pct" id="stamp-pct">Enter scores</span>
+            </div>
+          </div>
+          <dl class="result-details" id="result-details">
+            <div><dt>Graded so far</dt><dd id="detail-graded-weight">0% of course</dd></div>
+            <div><dt>Weighted contribution</dt><dd id="detail-contribution">0 pts</dd></div>
+            <div><dt>Still ungraded</dt><dd id="detail-remaining">100% of course</dd></div>
+          </dl>
+          <div class="required-box" id="required-box" hidden>
+            <p class="required-label">To reach your target, you need</p>
+            <p class="required-score" id="required-score">&mdash;</p>
+            <p class="required-sub" id="required-sub"></p>
+          </div>
+          <p class="result-warning" id="weight-warning" hidden>Your category weights don't total 100% yet &mdash; adjust them for an accurate result.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IS -->
+  <section class="content-section" id="what-is">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">02 — Overview</span>What is a semester grade calculator?</h2>
+      <p>A semester grade calculator adds up your homework, quizzes, tests, and final exam scores &mdash; using your class's actual weighting &mdash; to show your current grade instantly. No manual math, no guesswork. Enter your scores, and see exactly where you stand, updated the moment you add a new one.</p>
+      <p>Most classes don't grade everything equally. A final exam might count for 30% of your grade; a single homework assignment might count for 2%. A calculator that ignores this weighting gives you a number that doesn't match your report card. This one builds your class exactly as your teacher grades it, so you always know where you stand &mdash; and what you still need to hit your target.</p>
+
+      <div class="who-uses-grid">
+        <div class="who-card">
+          <h3>Students</h3>
+          <p>Track your grade in real time and plan study time around what actually moves the needle.</p>
+        </div>
+        <div class="who-card">
+          <h3>Teachers</h3>
+          <p>Check gradebook math and run "what-if" scenarios for students who ask about their standing.</p>
+        </div>
+        <div class="who-card">
+          <h3>Parents</h3>
+          <p>See exactly how a grade breaks down before a parent-teacher conversation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WEIGHTED GRADING WORKS -->
+  <section class="content-section alt" id="how-it-works">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">03 — The Concept</span>How weighted grading works</h2>
+      <p>In a weighted grading system, each category &mdash; homework, quizzes, tests, the final exam &mdash; makes up a set percentage of your total grade. A category worth 40% moves your final grade far more than one worth 5%. This exists because not every assignment measures the same depth of learning: a vocabulary quiz doesn't test mastery the way a final exam does.</p>
+      <p>Typical categories include exams, the final exam (often the single largest weight), homework, quizzes, participation, and labs or projects. Splitting your grade into categories &mdash; instead of one flat average &mdash; shows you exactly where you're strong and where you're not. A student can ace every test and still slip on homework completion, or the other way around.</p>
+
+      <h3>Semester grade vs. quarter grade vs. final grade</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Term</th><th>Covers</th><th>Used for</th></tr></thead>
+          <tbody>
+            <tr><td>Quarter grade</td><td>~9 weeks</td><td>Mid-term progress check</td></tr>
+            <tr><td>Semester grade</td><td>Full half-year term</td><td>Report cards, transcripts</td></tr>
+            <tr><td>Final grade</td><td>Entire course (may span multiple semesters)</td><td>Course credit, GPA</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>If your course runs one semester, your semester grade <em>is</em> your final grade. If it runs longer, think of your semester grade as a checkpoint on the way there.</p>
+      <p><strong>Weighted vs. unweighted:</strong> an unweighted average treats every assignment the same. A weighted average reflects real difficulty &mdash; acing every homework set while bombing the final would look misleadingly good under an unweighted system.</p>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="content-section" id="steps">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">04 — Walkthrough</span>How to calculate your semester grade, step by step</h2>
+      <div class="table-wrap">
+        <table class="steps-table">
+          <thead><tr><th>Step</th><th>What to do</th></tr></thead>
+          <tbody>
+            <tr><td>1. Pick your setup</td><td>Simple mode for a handful of categories and a quick average; use dropped scores for categories where your teacher drops the lowest grade.</td></tr>
+            <tr><td>2. Enter categories and weights</td><td>List everything your class grades &mdash; homework, quizzes, tests, final exam &mdash; with the weight from your syllabus. Enter just what's been completed so far to see your grade in real time.</td></tr>
+            <tr><td>3. Add your scores</td><td>Use earned/possible points (42 out of 50) or a straight percentage, whichever matches your gradebook.</td></tr>
+            <tr><td>4. Check your category averages</td><td>See each category on its own before it's combined, so you know exactly where you're losing points.</td></tr>
+            <tr><td>5. View your current grade</td><td>The calculator applies your weights and shows your grade based on completed work only.</td></tr>
+            <tr><td>6. Set a target grade</td><td>Enter the grade you want, and it calculates exactly what you need on what's left &mdash; most useful right before a final.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="callout"><strong>Before you trust the result:</strong> your category weights need to add up to exactly 100%. List them, add them up, adjust if they're off &mdash; otherwise the math won't match your real grade.</p>
+      <p>Works on mobile. You can save or print your results from your browser at any point.</p>
+    </div>
+  </section>
+
+  <!-- FORMULAS -->
+  <section class="content-section alt" id="formulas">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">05 — The Math</span>The formulas behind the calculator</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Formula</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code>Semester Grade = Σ (category weight × category score)</code></td><td>Multiply each category's weight by its score, then add every result together.</td></tr>
+            <tr><td><code>Category Average = (points earned ÷ points possible) × 100</code></td><td>Converts raw points into a percentage.</td></tr>
+            <tr><td><code>Required Final Score = (Target − Current × (1 − Final Weight)) ÷ Final Weight</code></td><td>Isolates exactly what you need on your remaining work to hit a target grade.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Doing it by hand:</strong> convert each weight to a decimal (30% → 0.30), multiply each category's score by its weight, add the weighted results, then convert back to a percentage.</p>
+
+      <h3>A few edge cases</h3>
+      <ul class="edge-list">
+        <li><strong>Ungraded work</strong> &mdash; plug in an assumed score to project where you'll land.</li>
+        <li><strong>Dropped lowest score</strong> &mdash; if your teacher drops your worst grade in a category, switch on that setting, or your number won't match the gradebook.</li>
+        <li><strong>Extra credit</strong> &mdash; usually capped at 100% per category even with bonus points; check your syllabus.</li>
+        <li><strong>Points-based grading</strong> &mdash; divide points earned by points possible, multiply by 100.</li>
+      </ul>
+      <p class="callout"><strong>Common manual mistakes:</strong> forgetting to convert a weight to a decimal, mixing points and percentages in the same category, leaving in a score that should've been dropped, and weights that don't total 100%.</p>
+    </div>
+  </section>
+
+  <!-- WORKED EXAMPLES -->
+  <section class="content-section" id="examples">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">06 — Worked Examples</span>See the math in action</h2>
+
+      <div class="example-card">
+        <p class="example-tag">Example 1 — Current grade, final not yet taken</p>
+        <p>Homework 20% (90%) · Quizzes 20% (85%) · Tests 30% (78%) · Final 30% (pending)</p>
+        <p class="example-math">(90×0.20) + (85×0.20) + (78×0.30) = 18 + 17 + 23.4 = <strong>58.4</strong> out of 70% completed</p>
+        <p class="example-result">→ 83.4% on graded work so far</p>
+      </div>
+
+      <div class="example-card">
+        <p class="example-tag">Example 2 — Final score needed to hit a target</p>
+        <p>Same class, target 85%, current contribution 58.4 (of 70% completed), final worth 30%.</p>
+        <p class="example-math">(85 − 58.4) ÷ 0.30 = <strong>88.67%</strong></p>
+        <p class="example-result">→ needed on the final</p>
+      </div>
+
+      <div class="example-card">
+        <p class="example-tag">Example 3 — Projecting a full grade before the final</p>
+        <p>Homework 10% (95%) · Quizzes 15% (88%) · Exams 40% (82%) · Final 35% (projected 85%)</p>
+        <p class="example-math">Completed: 9.5 + 13.2 + 32.8 = 55.5. Projected final: 85×0.35 = 29.75.</p>
+        <p class="example-result">→ Projected total: 85.25%</p>
+      </div>
+
+      <div class="example-card">
+        <p class="example-tag">Example 4 — Recovering from a zero</p>
+        <p>One missed homework assignment drops that category from 92% to 74% &mdash; a 3.6-point hit at 20% weight (18.4 vs. 14.8).</p>
+        <p class="example-result">Since homework is graded often, a few strong scores afterward can close most of the gap quickly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRADING SCALE -->
+  <section class="content-section alt" id="scale">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">07 — Reference</span>Grading scale reference</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Letter</th><th>Percentage</th><th>GPA</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>90–100%</td><td>4.0</td></tr>
+            <tr><td>B</td><td>80–89%</td><td>3.0</td></tr>
+            <tr><td>C</td><td>70–79%</td><td>2.0</td></tr>
+            <tr><td>D</td><td>60–69%</td><td>1.0</td></tr>
+            <tr><td>F</td><td>Below 60%</td><td>0.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Cutoffs vary by school &mdash; check yours.</p>
+      <p><strong>GPA in short:</strong> your GPA condenses letter grades into one number, usually on a 4.0 scale. Semester GPA covers one term; cumulative GPA averages every term so far &mdash; which is why one rough semester usually matters less to your overall GPA than it feels like at the time.</p>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="content-section" id="related">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">08 — Compare</span>Related tools</h2>
+      <div class="related-grid">
+        <div class="related-card">
+          <h3>vs. GPA Calculator</h3>
+          <p>Use this tool per class, then feed those grades into a GPA calculator for the bigger picture.</p>
+        </div>
+        <div class="related-card">
+          <h3>vs. Test Grade Calculator</h3>
+          <p>That tool scores one exam; this one folds that score into every other category for a full-term grade.</p>
+        </div>
+        <div class="related-card">
+          <h3>vs. Grade Average Calculator</h3>
+          <p>A plain average calculator usually ignores weighting; this tool applies your real category weights.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO RAISE -->
+  <section class="content-section alt" id="raise">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">09 — Strategy</span>How to raise your semester grade</h2>
+      <ul class="raise-list">
+        <li><strong>Build a study schedule</strong> &mdash; the Pomodoro technique (focused intervals, short breaks) beats cramming.</li>
+        <li><strong>Stay active in class</strong> &mdash; take notes, ask questions, review material the same day.</li>
+        <li><strong>Target your weak spots</strong>, not everything equally.</li>
+        <li><strong>Cut distractions</strong> &mdash; phone away, notifications off while studying.</li>
+        <li><strong>Test different study methods</strong> &mdash; visual review, self-explanation, different note-taking &mdash; until you find what sticks.</li>
+        <li><strong>Ask for help early</strong> &mdash; a tutor, a study group, or your teacher directly. It costs nothing to ask.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TROUBLESHOOTING -->
+  <section class="content-section" id="troubleshooting">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">10 — Fixes</span>Troubleshooting</h2>
+      <div class="qa-list">
+        <div class="qa-item"><h3>Grade lower than expected?</h3><p>Cross-check every entry against your teacher's gradebook &mdash; a missing assignment or a blank left in by mistake is the usual cause. Some schools round each category before combining, others round only the total; that alone can shift results slightly.</p></div>
+        <div class="qa-item"><h3>Required final score looks too high?</h3><p>Recheck your earlier scores for a typo first. If the numbers check out and the target's genuinely out of reach, talk to your teacher about your options.</p></div>
+        <div class="qa-item"><h3>Weights don't total 100%?</h3><p>Go back to your syllabus and adjust until they do &mdash; the math won't hold otherwise.</p></div>
+        <div class="qa-item"><h3>Extra credit not showing up?</h3><p>Check whether that category is capped at 100%.</p></div>
+        <div class="qa-item"><h3>Dropped score not applied?</h3><p>Make sure the drop-lowest-score setting is switched on for that category.</p></div>
+        <div class="qa-item"><h3>Blank categories?</h3><p>They're excluded from your total, not counted as zero. For a realistic forward look, enter a projected score instead of leaving it blank.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="content-section alt" id="faq">
+    <div class="wrap prose">
+      <h2 class="section-title"><span class="section-eyebrow">11 — FAQ</span>Frequently asked questions</h2>
+      <div class="accordion" id="accordion">
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">How do I calculate a weighted grade?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>Convert each weight to a decimal, multiply by that category's score, and add the results.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">What final exam score do I need?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>Subtract your current weighted contribution from your target, then divide by the final's weight.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">How do I average two grades from a semester?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>Multiply each grade by its weight, add them, and divide by the total weight if it doesn't already equal 100%.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">My gradebook uses points, not percentages — how do I convert?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>Divide points earned by points possible, then multiply by 100.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">What happens when my lowest quiz or test is dropped?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>It's removed before the category average is calculated &mdash; which typically raises that average.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">Does participation count toward my semester grade?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>Yes, if your teacher assigns it its own weighted category.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">How is a semester grade different from a GPA?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>A semester grade covers one class over one term. GPA averages several semester grades into one number, usually out of 4.0.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">Does this work for both high school and college grading?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>Yes &mdash; categories and weights are fully customizable either way.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">What counts as a passing grade?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>Usually 60–65% or a "D," though some programs require a "C" or better. Check your school's policy.</p></div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-trigger" aria-expanded="false">Does it work on mobile?<span class="acc-icon">+</span></button>
+          <div class="acc-panel"><p>Yes, built for phones and desktop alike.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <span class="brand-mark" aria-hidden="true">§</span>
+      <span class="footer-title">Semester Grade Calculators</span>
+      <p class="footer-copy">A free, weighted grade calculator for students, teachers, and parents.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#calculator">Calculator</a>
+      <a href="#how-it-works">How Weighted Grading Works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+  <p class="footer-bottom">&copy; 2026 semestergradecalculators.com</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
