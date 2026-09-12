@@ -3,13 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to Calculate Your Grade Before the Final Exam — Semester Grade Calculator Blog</title>
+<title>How to Calculate Your Grade Before the Final Exam — Semester Grades Calculator Blog</title>
 <meta name="description" content="Learn how to calculate the score you need on your final exam with a free calculator, formula, and worked examples for different final exam weights.">
 <link rel="canonical" href="https://semestergradescalculator.com/blog/how-to-calculate-grade-before-final-exam/">
 
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to Calculate Your Grade Before the Final Exam">
 <meta property="og:description" content="Learn how to calculate the score you need on your final exam with a free calculator, formula, and worked examples for different final exam weights.">
+<meta property="og:url" content="https://semestergradescalculator.com/blog/how-to-calculate-grade-before-final-exam/">
+<meta property="og:image" content="https://semestergradescalculator.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Semester Grades Calculator">
+<meta property="article:published_time" content="2026-08-12T00:00:00+00:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://semestergradescalculator.com/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -239,7 +247,7 @@ Final Exam Score Needed = 60%</pre>
   <div class="wrap footer-inner">
     <div>
       <span class="brand-mark" aria-hidden="true">§</span>
-      <span class="footer-title">Semester Grades Calculators</span>
+      <span class="footer-title">Semester Grades Calculator</span>
       <p class="footer-copy">A free, weighted grade calculator for students, teachers, and parents.</p>
     </div>
     <div class="footer-links">
@@ -261,15 +269,40 @@ Final Exam Score Needed = 60%</pre>
   var headline = document.getElementById("mc-headline");
   var detail = document.getElementById("mc-detail");
 
-  btn.addEventListener("click", function () {
-    var current = parseFloat(document.getElementById("mc-current").value);
-    var weight = parseFloat(document.getElementById("mc-weight").value);
-    var target = parseFloat(document.getElementById("mc-target").value);
+  function showError(message) {
+    headline.textContent = "Check your numbers";
+    detail.textContent = message;
+    resultBox.classList.add("visible");
+  }
 
-    if (isNaN(current) || isNaN(weight) || isNaN(target) || weight <= 0) {
-      headline.textContent = "Enter all three numbers";
-      detail.textContent = "Fill in your current grade, final exam weight, and target grade to calculate.";
-      resultBox.classList.add("visible");
+  btn.addEventListener("click", function () {
+    var currentRaw = document.getElementById("mc-current").value.trim();
+    var weightRaw = document.getElementById("mc-weight").value.trim();
+    var targetRaw = document.getElementById("mc-target").value.trim();
+
+    if (currentRaw === "" || weightRaw === "" || targetRaw === "") {
+      showError("Fill in your current grade, final exam weight, and target grade to calculate.");
+      return;
+    }
+
+    var current = Number(currentRaw);
+    var weight = Number(weightRaw);
+    var target = Number(targetRaw);
+
+    if (!isFinite(current) || !isFinite(weight) || !isFinite(target)) {
+      showError("Please enter numbers only — no letters or symbols.");
+      return;
+    }
+    if (current < 0 || current > 100) {
+      showError("Current grade should be between 0 and 100.");
+      return;
+    }
+    if (weight <= 0 || weight > 100) {
+      showError("Final exam weight should be greater than 0 and no more than 100.");
+      return;
+    }
+    if (target < 0 || target > 100) {
+      showError("Target grade should be between 0 and 100.");
       return;
     }
 
